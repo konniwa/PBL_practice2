@@ -98,23 +98,36 @@ shuffle($combinations);
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background: #fff8b5;
+            color: #333;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 500px; /* 幅を小さく調整 */
+            border: 2px solid #ffcc00;
         }
 
         h1 {
-            color: #333;
+            color: #ff9800;
+            font-size: 1.5rem; /* 小さめの見出し */
+            margin-bottom: 15px;
         }
 
         p {
-            font-size: 1.2em;
-            color: #555;
+            font-size: 1rem; /* 説明文を小さめに */
+            margin-bottom: 15px;
         }
 
         ul {
@@ -125,50 +138,69 @@ shuffle($combinations);
         li {
             background: #fff;
             border: 1px solid #ddd;
-            margin: 10px 0;
-            padding: 10px;
+            margin: 8px 0; /* 間隔を調整 */
+            padding: 10px; /* 内側の余白を小さく */
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px; /* アイテム間の余白を調整 */
+        }
+
+        li img {
+            width: 40px; /* 画像サイズを小さく */
+            height: 40px;
+            object-fit: cover;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        li span {
+            font-size: 1rem; /* テキストサイズを小さく */
+            color: #555;
         }
 
         a {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 15px;
             text-decoration: none;
             color: #fff;
-            background-color: #007bff;
-            padding: 10px 20px;
+            background-color: #ff9800;
+            padding: 8px 15px; /* ボタンをコンパクトに */
             border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1rem; /* ボタンテキストのサイズを調整 */
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #e67e22;
+            transform: scale(1.05);
         }
     </style>
 </head>
 
 <body>
-    <h1>おすすめの組み合わせ</h1>
-    <p>残り飲酒量の限度: <?php echo htmlspecialchars($limit); ?> ml</p>
-    <?php if (!empty($combinations)): ?>
-        <ul>
-            <?php foreach ($combinations as $combination): ?>
-                <li>
-                    <?php
-                    $displayText = [];
-                    foreach ($combination as $alcohol => $cups) {
-                        $displayText[] = htmlspecialchars($alcohol) . ": " . $cups . " 杯";
-                    }
-                    echo implode(" ", $displayText);
-                    ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>もう飲酒は控えましょう｡ 限度を超えています｡ </p>
-    <?php endif; ?>
-    <a href="index.php">ホームに戻る</a>
+    <div class="container">
+        <h1>おすすめの組み合わせ</h1>
+        <p>残り飲酒量の限度: <?php echo htmlspecialchars($limit); ?> ml</p>
+        <?php if (!empty($combinations)): ?>
+            <ul>
+                <?php foreach ($combinations as $combination): ?>
+                    <li>
+                        <?php
+                        foreach ($combination as $alcohol => $cups) {
+                            $image = $alcoholData[$alcohol]['image'] ?? ''; // 画像パスを取得
+                            echo '<img src="' . htmlspecialchars($image) . '" alt="' . htmlspecialchars($alcohol) . '">';
+                            echo '<span>' . htmlspecialchars($alcohol) . ": " . $cups . " 杯</span>";
+                        }
+                        ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>もう飲酒は控えましょう｡ 限度を超えています｡ </p>
+        <?php endif; ?>
+        <a href="index.php">ホームに戻る</a>
+    </div>
 </body>
 
 </html>
