@@ -105,58 +105,64 @@ shuffle($combinations);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            overflow: auto; /* 必要に応じてスクロール可能 */
         }
 
         .container {
             background: #fff;
             padding: 20px;
             border-radius: 10px;
+            box-sizing: border-box; /* サイズを正確に調整 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
             width: 100%;
-            max-width: 500px; /* 幅を小さく調整 */
+            max-width: 500px;
             border: 2px solid #ffcc00;
         }
 
         h1 {
             color: #ff9800;
-            font-size: 1.5rem; /* 小さめの見出し */
+            font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
         p {
-            font-size: 1rem; /* 説明文を小さめに */
+            font-size: 1rem;
             margin-bottom: 15px;
         }
 
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
 
         li {
             background: #fff;
             border: 1px solid #ddd;
-            margin: 8px 0; /* 間隔を調整 */
-            padding: 10px; /* 内側の余白を小さく */
+            margin: 8px 0;
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
-            gap: 10px; /* アイテム間の余白を調整 */
+            gap: 10px;
+            overflow: hidden; /* アイテムの切れを防止 */
         }
 
         li img {
-            width: 40px; /* 画像サイズを小さく */
+            width: 40px;
             height: 40px;
-            object-fit: cover;
+            object-fit: contain; /* 画像全体を表示 */
             border-radius: 5px;
+            flex-shrink: 0; /* 画像が縮まないよう固定 */
         }
 
         li span {
-            font-size: 1rem; /* テキストサイズを小さく */
+            font-size: 1rem;
             color: #555;
+            text-align: left;
         }
 
         a {
@@ -165,9 +171,9 @@ shuffle($combinations);
             text-decoration: none;
             color: #fff;
             background-color: #ff9800;
-            padding: 8px 15px; /* ボタンをコンパクトに */
+            padding: 8px 15px;
             border-radius: 5px;
-            font-size: 1rem; /* ボタンテキストのサイズを調整 */
+            font-size: 1rem;
             transition: background-color 0.3s, transform 0.2s;
         }
 
